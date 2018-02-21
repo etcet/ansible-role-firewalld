@@ -1,0 +1,16 @@
+---
+
+- name: Open ports
+  firewalld:
+    port: "{{ item }}"
+    permanent: true
+    immediate: true
+    state: enabled
+  with_items:
+    "{{ firewalld_allowed_ports }}"
+
+- name: Start and enable firewalld
+  service: 
+    name: firewalld
+    state: started
+    enabled: yes
